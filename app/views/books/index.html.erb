@@ -1,0 +1,38 @@
+<%= notice %>
+
+<%= link_to "nuevo libro", books_new_path %>
+
+<%= search_form_for @q do |f| %>
+    <%= f.label :estado %>
+    <%= f.search_field :status_eq %>
+    <%= f.submit %>
+<% end %>
+
+<table class="table table-success table-striped mt-5">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"><%= sort_link(@q, :title, "Título") %></th>
+      <th scope="col">Autor</th>
+      <th scope="col"><%= sort_link(@q, :status, "Estado") %></th>
+      <th scope="col">Fecha préstamo</th>
+      <th scope="col">Fecha devolución</th>
+      <th scope="col">Amigo</th>
+      <th scope="col">Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |book|%>
+            <tr>
+                <th scope="row"><%= book.id%></th>
+                <td><%= book.title%></td>
+                <td><%= book.author%></td>
+                <td><%= book.status%></td>
+                <td><%= book.borrow_date%></td>
+                <td><%= book.return_date%></td>
+                <td><%= book.friend%></td>
+                <td><%= link_to "Editar", books_edit_path(book)%></td>
+            </tr>
+        <% end %>
+  </tbody>
+</table>
